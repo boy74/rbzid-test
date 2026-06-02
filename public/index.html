@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head><title>RBZID Test</title></head>
+<head>
+    <title>RBZID Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 <body>
-  <h1>RBZID Anti-Bot Test</h1>
-  <p>Galaw mo mouse mo tapos click verify</p>
-  <button onclick="verify()">Verify</button>
-  <p id="result"></p>
+    <h1>RBZID Anti-Bot Test</h1>
+    <p>Click mo yung button para ma-verify</p>
+    <button onclick="verify()">Verify</button>
+    <p id="result"></p>
 
-  <script>
-    let mouse = [];
-    document.onmousemove = e => mouse.push([e.clientX, e.clientY]);
-    
-    function verify() {
-    // Direct save na, walang API call
-    const token = "rbzid_" + Date.now();
-    localStorage.setItem('rbzid_token', token);
-    document.getElementById('result').innerText = 'Verified! Token: ' + token;
-}
+    <script>
+        function verify() {
+            const token = "rbzid_" + Date.now();
+            localStorage.setItem('rbzid_token', token);
+            document.getElementById('result').innerText = 'Verified! Token: ' + token;
+        }
+    </script>
+</body>
+</html>
