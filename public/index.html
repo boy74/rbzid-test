@@ -1,20 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RBZID Test</title>
+    <title>RBZID All-in-One</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <h1>RBZID Anti-Bot Test</h1>
-    <p>Click mo yung button para ma-verify</p>
+    
+    <h3>Step 1: Verify ka muna</h3>
     <button onclick="verify()">Verify</button>
-    <p id="result"></p>
+    <p id="verifyResult"></p>
+
+    <hr>
+
+    <h3>Step 2: Download mo na</h3>
+    <button onclick="download()">Download File</button>
+    <p id="downloadResult"></p>
 
     <script>
         function verify() {
             const token = "rbzid_" + Date.now();
             localStorage.setItem('rbzid_token', token);
-            document.getElementById('result').innerText = 'Verified! Token: ' + token;
+            document.getElementById('verifyResult').innerText = 'Verified! Token: ' + token;
+        }
+
+        function download() {
+            const token = localStorage.getItem('rbzid_token');
+            
+            if (token) {
+                document.getElementById('downloadResult').innerText = '✅ Verified! Download link: secret-file.txt';
+            } else {
+                document.getElementById('downloadResult').innerText = '❌ Error: Mag-verify ka muna sa taas!';
+            }
         }
     </script>
 </body>
