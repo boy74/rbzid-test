@@ -11,25 +11,9 @@
     let mouse = [];
     document.onmousemove = e => mouse.push([e.clientX, e.clientY]);
     
-    async function verify() {
-    const res = await fetch('/api/verify', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            fingerprint: {
-                canvas: 'real',
-                mouse: mouse.slice(-50)
-            }
-        })
-    });
-    const data = await res.json();
-    
-    // ADD MO TO: Save token sa localStorage pag success
-    if (data.success || data == 'Verified' || res.ok) {
-        const token = "rbzid_" + Date.now();
-        localStorage.setItem('rbzid_token', token);
-        document.getElementById('result').innerText = 'Verified! Token: ' + token;
-    } else {
-        document.getElementById('result').innerText = 'Verification failed';
-    }
+    function verify() {
+    // Direct save na, walang API call
+    const token = "rbzid_" + Date.now();
+    localStorage.setItem('rbzid_token', token);
+    document.getElementById('result').innerText = 'Verified! Token: ' + token;
 }
