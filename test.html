@@ -1,0 +1,14 @@
+<button onclick="test()">Pindutin Mo Ko</button>
+<p id="labas"></p>
+
+<script>
+async function test() {
+  let res = await fetch('https://maps-albany-creates-processing.trycloudflare.com/api/verify', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: '{"test":"123"}'
+  });
+  let data = await res.json();
+  document.getElementById('labas').innerText = 'Token mo: ' + data.rbzid;
+}
+</script>
