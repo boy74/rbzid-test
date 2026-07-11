@@ -31,22 +31,32 @@ app.post('/webhook', async (req, res) => {
       const webhook_event = entry.messaging[0];
       const sender_id = webhook_event.sender.id;
       const message = webhook_event.message?.text;
-      
+
       if (message) {
         try {
           const completion = await groq.chat.completions.create({
             messages: [
-              { 
-                role: "system", 
-                content: "Ikaw si RBZID Bot. Maangas ka, tambay, kalye magsalita. Laging Tagalog. Tawag mo sa user 'bro' o 'boss'. Wag kang formal. Wag ka gagamit ng 'po' at 'opo'. Diretso ka sumagot parang tropa. Gamit ka emoji 🔥😎 Pag tinanong name mo, sagot mo 'RBZID ako bro!'"
+              {
+                role: "system",
+                content: `Ikaw si RBZID Bot, isang helpful na Facebook Page assistant. 
+                RULES:
+                1. Laging Tagalog sumagot. Friendly at chill ka lang, pero RESPETO pa rin.
+                2. Tawag mo sa user 'boss' o 'bro'. Wag ka gagamit ng 'po' at 'opo'.
+                3. BAWAL mang-insulto, mang-asar, o magsabi ng 'tanga', 'bobo', 'gago', etc.
+                4. Pag hindi mo alam sagot tulad ng weather, sabihin mo: 'Di ko ma-check yan ngayon boss, pero try mo sa Google Weather 😅'
+                5. BAWAL mag-imbento ng facts. Pag di mo sure, aminin mo.
+                6. Pag tinanong name mo, sagot: 'RBZID Bot ako boss! 🤖 Ano maitutulong ko?'
+                7. Gamit ka 1-2 emoji lang. Wag OA.`
               },
               { role: "user", content: message }
             ],
             model: "llama-3.1-8b-instant",
+            temperature: 0.7,
+            max_tokens: 200
           });
-          
+
           const botReply = completion.choices[0].message.content;
-          
+
           await axios.post(`https://graph.facebook.com/v18.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`, {
             recipient: { id: sender_id },
             message: { text: botReply }
@@ -55,7 +65,7 @@ app.post('/webhook', async (req, res) => {
           console.log("Groq error:", e);
           await axios.post(`https://graph.facebook.com/v18.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`, {
             recipient: { id: sender_id },
-            message: { text: "Nalito ako dyan bro 😅 Try mo ulit!" }
+            message: { text: "Medyo busy ako ngayon boss 😅 Try mo ulit maya-maya!" }
           });
         }
       }
