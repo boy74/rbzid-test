@@ -9,7 +9,23 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 app.get('/', (req, res) => {
-  res.send('RBZID BOT IS LIVE! 🤖🔥');
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>RBZID Bot</title>
+      <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+      </script>
+      <script defer src="/_vercel/insights/script.js"></script>
+    </head>
+    <body>
+      <h1>RBZID BOT IS LIVE! 🤖🔥</h1>
+    </body>
+    </html>
+  `);
 });
 
 app.get('/webhook', (req, res) => {
