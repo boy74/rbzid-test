@@ -1,8 +1,12 @@
 const express = require('express');
 const axios = require('axios');
 const Groq = require('groq-sdk');
+const { inject } = require('@vercel/analytics');
 const app = express();
 app.use(express.json());
+
+// Inject Vercel Analytics
+inject();
 
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
