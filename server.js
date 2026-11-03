@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>RBZID Bot</title>
       <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        window.va = window.va || function () { (window.vaQueue = window.vaQueue || []).push(arguments); };
       </script>
       <script defer src="/_vercel/insights/script.js"></script>
     </head>
